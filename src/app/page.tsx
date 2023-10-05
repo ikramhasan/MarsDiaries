@@ -3,7 +3,12 @@ import Link from "next/link";
 
 export default async function Home() {
   const photosRes = await fetch(
-    `https://api.nasa.gov/mars-photos/api/v1/rovers/perseverance/latest_photos?api_key=${process.env.NASA_API_KEY}`
+    `https://api.nasa.gov/mars-photos/api/v1/rovers/perseverance/latest_photos?api_key=${process.env.NASA_API_KEY}`,
+    {
+      next: {
+        revalidate: 10,
+      },
+    }
   );
 
   const photos = await photosRes.json();
